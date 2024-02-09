@@ -34,7 +34,7 @@ jobs:
             name: nodeappImage
 
         - name: Load Docker Image
-          run: docker load < nodeappImage
+          run: docker image load < nodeappImage
         - name: Run Docker
           run: docker run --name nodeAppContainer -dp 127.0.0.1:3000:3000 nodeappImage
         
