@@ -34,7 +34,7 @@ jobs:
 
         - name: Found ip Address
           run: APP_IP=$(docker inspect --format='{{ range .NetworkSettings.Networks }}{{ .IPAddress }}{{ end }}' nodeapcontainer)
-            echo "APP_IP=$APP_IP" >> $GITHUB_ENV
+            echo "APP_IP=$APP_IP" 
 
         - name: Print Latest Releases
           run: |
