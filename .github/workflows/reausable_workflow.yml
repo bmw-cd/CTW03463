@@ -44,15 +44,24 @@ jobs:
             with:
               username: ${{ secrets.docker_hub_username }}
               password: ${{ secrets.docker_hub_access_token }}
+              
           - name: Set up Docker Buildx
+            uses: docker/setup-buildx-action@v3
+            
+          - name: Build and export
             uses: docker/build-push-action@v5
             with:
-              push: false
+              context: .
               tags: ${{ secrets.docker_hub_username }}/nodeapp-v1
+              outputs: type=docker,dest=/tmp/nodeapp-v1.tar
+          - name: Upload artifact
+            uses: actions/upload-artifact@v3
+            with:
+                name: nodeappImage
+                path: /tmp/nodeapp-v1.tar
           
-          - name: Save Docker image to a tar file
-            if: ${{ inputs.environment_name == 'prod' }}
-            run: docker save ${{ secrets.docker_hub_username }}/nodeapp-v1 -o nodeapp-v1.tar
+
+              
           - name: Upload a Build Artifact 
             uses:  actions/upload-artifact@v3
             with:
