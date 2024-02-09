@@ -48,10 +48,10 @@ jobs:
               username: ${{ secrets.docker_hub_username }}
               password: ${{ secrets.docker_hub_access_token }}
 
-        - name: Tag the image
-          run: docker tag nodeapp-v1:latest ${{ secrets.docker_hub_username }}/nodeapp-v1:latest
-      
-        - name: Push the image to DockerHub
-          run: docker push ${{ secrets.docker_hub_username }}/nodeapp-v1:latest
+        - name: Set up Docker Buildx
+          uses: docker/build-push-action@v5
+          with:
+            push: true
+            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/nodeapp-v1:latest
 
         
