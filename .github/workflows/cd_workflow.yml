@@ -6,6 +6,7 @@ on:
    # types:
    #   - completed
    push:
+   workflow_dispatch:
 jobs:
     compile:
         name: Compile Prod
