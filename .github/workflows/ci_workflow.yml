@@ -34,13 +34,13 @@ jobs:
           with:
             context: .
             tags: ${{ secrets.DOCKER_HUB_USERNAME }}/v1
-            outputs: type=docker,dest=v1.tar
+            outputs: type=docker,dest=/tmp/v1.tar
         
         - name: Upload artifact
           uses: actions/upload-artifact@v3
           with:
             name: imageArtifact
-            path: /v1.tar
+            path: /tmp/v1.tar
         - name: Output the image name
           id: image_output
           run: echo "The image name is ${{ secrets.DOCKER_HUB_USERNAME }}/v1"
