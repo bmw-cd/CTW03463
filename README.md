@@ -3,9 +3,9 @@
 > Use Express.js to create three (3) routes that consume the [API](https://nodejs.org/dist/index.json)
 
 
-![Continuous Integration](https://github.com/bmw-cd/pipeline/actions/workflows/ci_workflow.yml/badge.svg)
+![Continuous Integration](https://github.com/bmw-cd/CTW03463/actions/workflows/ci_workflow.yml/badge.svg)
 
-![Continuous Delivery](https://github.com/bmw-cd/pipeline/actions/workflows/cd_workflow.yml/badge.svg
+![Continuous Delivery](https://github.com/bmw-cd/CTW03463/actions/workflows/cd_workflow.yml/badge.svg
 )
 
 zxc
