@@ -19,6 +19,8 @@ jobs:
             sonar_token: ${{ secrets.SONAR_TOKEN }}
             sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
     deploy:
+        needs: compile # This job depends on the successful completion of the int-deployment job
+
         runs-on: self-hosted
         if: ${{ github.event.workflow_run.conclusion == 'success' }}
         steps:
