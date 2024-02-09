@@ -9,7 +9,6 @@ jobs:
   
     deploy:
       
-        if: github.event.pull_request.merged && github.event.workflow_run.conclusion == 'success'
 
         runs-on: self-hosted
         steps:
