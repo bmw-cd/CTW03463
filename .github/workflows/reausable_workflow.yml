@@ -60,13 +60,6 @@ jobs:
                 name: nodeappImage
                 path: /tmp/nodeapp-v1.tar
           
-
-              
-          - name: Upload a Build Artifact 
-            uses:  actions/upload-artifact@v3
-            with:
-                name: nodeapp-v1
-                path: nodeapp-v1.tar
           - name: Output the image name
             id: image_output
             run: echo "The image name is ${{ secrets.docker_hub_username }}/nodeapp-v1"

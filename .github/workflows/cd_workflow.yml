@@ -16,5 +16,5 @@ jobs:
         - name: Download artifact
           uses: actions/download-artifact@v3
           with:
-            name: nodeapp-v1
+            name: nodeappImage
             path: /tmp/nodeapp-v1.tar
