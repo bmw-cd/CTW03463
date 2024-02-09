@@ -14,21 +14,27 @@ jobs:
         - name: Checkout code
           uses: actions/checkout@v4
 
-        - name: Download  
-          uses: actions/download-artifact@v4
-          with:
-            name: my-other-artifact
-            github-token: ${{ secrets.GITHUB_TOKEN }} # token with actions:read permissions on target repo
-            repository: actions/toolkit
-            run-id: ${{ github.event.workflow_run.id }}
+        #- name: Download  
+        #  uses: actions/download-artifact@v4
+        #  with:
+        #    name: my-other-artifact
+        #    github-token: ${{ secrets.GITHUB_TOKEN }} # token with actions:read permissions on target repo
+        #    repository: actions/toolkit
+        #    run-id: ${{ github.event.workflow_run.id }}
 
         - name: Load Docker Image
           run: docker load --input /tmp/nodeapp-v1.tar
+
+
         - name: Run Docker
-          run: docker run --name nodeAppContainer -dp 127.0.0.1:3000:3000 nodeappImage
-        
+          run: docker run --name=nodeapcontainer -dp 127.0.0.1:3000:3000 ${{ secrets.docker_hub_username }}/nodeapp-v1
+          
+        - name: Found ip Address
+          run: echo "APP_IP=$(docker inspect --format='{{.NetworkSettings.IPAddress}}' app)" >> $GITHUB_ENV
+
         - name: Print Latest Releases
-          run: curl http://127.0.0.1:3000/api/latest-releases 
+          run: curl http://$APP_IP:3000/api/latest-releases 
+
         - name: Log in to Docker Hub
           uses: docker/login-action@v3
           with:
