@@ -35,7 +35,7 @@ jobs:
             name: nodeappImage
 
         - name: Load Docker Image
-          run: docker load --input tmp.tar
+          run: docker load --input /tmp/nodeappImage.tar
         - name: Run Docker
           run: docker run --name nodeAppContainer -dp 127.0.0.1:3000:3000 nodeappImage
         
