@@ -1,0 +1,48 @@
+name: CI workflow
+
+on:
+  workflow_call:
+    inputs:
+      environment_name:
+        description: 'The target environment for the workflow'
+        required: true
+        type: string
+
+jobs:
+  ci_workflow:
+    runs-on: self-hosted
+    outputs:
+      image_output: ${{ steps.image_output.outputs.value }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Test application
+        run: npm test
+
+      #- name: SonarQube Scan
+      #  uses: sonarsource/sonarqube-scan-action@master
+      #  env:
+       #   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+       #   SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      # Removed the Docker login step since push is set to false
+
+      - name: Set up Docker Buildx
+        uses: docker/build-push-action@v5
+        with:
+          push: false
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/nodeapp-v1:${{ github.sha }}
+
+      - name: Save Docker image to a tar file
+        run: docker save ${{ secrets.DOCKER_HUB_USERNAME }}/nodeapp-v1:${{ github.sha }} -o nodeapp-v1.tar
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.3.1
+        with:
+            name: nodeapp-v1
+            path: nodeapp-v1.tar
+
+      - name: Output the image name
+        id: image_output
+        run: echo "::set-output name=value::${{ secrets.DOCKER_HUB_USERNAME }}/nodeapp-v1:${{ github.sha }}"
