@@ -1,7 +1,6 @@
 name: Deployment Workflow
 
 on:
-  push:
   workflow_dispatch:
 
 
