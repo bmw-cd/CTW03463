@@ -27,7 +27,7 @@ jobs:
         - name: Set up Docker Buildx
           uses: docker/build-push-action@v5
           with:
-            push: false
+            context: .
             tags: ${{ secrets.DOCKER_HUB_USERNAME }}/v1
             outputs: type=docker,dest=/tmp/v1.tar
         
