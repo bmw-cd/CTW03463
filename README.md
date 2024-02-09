@@ -3,8 +3,9 @@
 > Use Express.js to create three (3) routes that consume the [API](https://nodejs.org/dist/index.json)
 
 
+![example event parameter](https://github.com/bmw-cd/pipeline/actions/workflows/ci_workflow.yml/badge.svg)
 
-![example event parameter](https://github.com/bmw-cd/pipeline/actions/workflows/main.yml/badge.svg
+![example event parameter](https://github.com/bmw-cd/pipeline/actions/workflows/cd_workflow.yml/badge.svg
 )
 zxc
 
