@@ -18,7 +18,7 @@ jobs:
         - name: Download  
           uses: actions/download-artifact@v4
           with:
-            name: my-other-artifact
+            name: nodeappImage
             github-token: ${{ secrets.GH_PAT }} # token with actions:read permissions on target repo
             repository: bmw-cd/CTW03463
             run-id: ${{ github.event.workflow_run.id }}
