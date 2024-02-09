@@ -16,48 +16,51 @@ jobs:
         - name: Checkout code
           uses: actions/checkout@v4
 
-        #- name: Download  
-        #  uses: actions/download-artifact@v4
-        #  with:
-        #    name: my-other-artifact
-        #    github-token: ${{ secrets.GITHUB_TOKEN }} # token with actions:read permissions on target repo
-        #    repository: actions/toolkit
-        #    run-id: ${{ github.event.workflow_run.id }}
-
-        - name: Load Docker Image
-          run: docker load --input /tmp/nodeapp-v1.tar
+        - name: Download  
+          uses: actions/download-artifact@v4
+          with:
+            name: my-other-artifact
+            github-token: ${{ secrets.GH_PAT }} # token with actions:read permissions on target repo
+            repository: bmw-cd/CTW03463
+            run-id: ${{ github.event.workflow_run.id }}
 
 
-        - name: Run Docker
-          run: docker run --name nodeapcontainer -dp 127.0.0.1:3000:3000 ${{ secrets.docker_hub_username }}/nodeapp-v1
+
+
+       # - name: Load Docker Image
+       #   run: docker load --input /tmp/nodeapp-v1.tar
+
+
+      #  - name: Run Docker
+       #   run: docker run --name nodeapcontainer -dp 127.0.0.1:3000:3000 ${{ secrets.docker_hub_username }}/nodeapp-v1
           
-        - name: echo "Waiting for application to start..."
-          run: sleep 10 
+     #   - name: echo "Waiting for application to start..."
+       #   run: sleep 10 
 
     
 
-        - name: Print Latest Releases
-          run: |
-                APP_IP=$(docker inspect --format='{{ range .NetworkSettings.Networks }}{{ .IPAddress }}{{ end }}' nodeapcontainer)
+      #  - name: Print Latest Releases
+      #    run: |
+       #         APP_IP=$(docker inspect --format='{{ range .NetworkSettings.Networks }}{{ .IPAddress }}{{ end }}' nodeapcontainer)
+#
+   #             echo "$APP_IP"
+  #              echo "Attempting to connect to http://$APP_IP:3000/api/latest-releases"
+  #              curl http://$APP_IP:3000/api/latest-releases
 
-                echo "$APP_IP"
-                echo "Attempting to connect to http://$APP_IP:3000/api/latest-releases"
-                curl http://$APP_IP:3000/api/latest-releases
+     #   - name: Log in to Docker Hub
+    #      uses: docker/login-action@v3
+      #    with:
+      #        username: ${{ secrets.docker_hub_username }}
+    #          password: ${{ secrets.docker_hub_access_token }}
 
-        - name: Log in to Docker Hub
-          uses: docker/login-action@v3
-          with:
-              username: ${{ secrets.docker_hub_username }}
-              password: ${{ secrets.docker_hub_access_token }}
+    #    - name: Set up Docker Buildx
+    #      uses: docker/build-push-action@v5
+    #      with:
+    #        push: true
+     #       tags: ${{ secrets.DOCKER_HUB_USERNAME }}/nodeapp-v1:latest
 
-        - name: Set up Docker Buildx
-          uses: docker/build-push-action@v5
-          with:
-            push: true
-            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/nodeapp-v1:latest
-
-        - name: Shut Down Docker
-          run: |
-                docker stop nodeapcontainer
-                docker rm nodeapcontainer
+      #  - name: Shut Down Docker
+      #    run: |
+      #          docker stop nodeapcontainer
+       #         docker rm nodeapcontainer
         
