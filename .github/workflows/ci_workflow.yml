@@ -34,14 +34,16 @@ jobs:
           with:
             push: true
             tags: ${{ secrets.DOCKER_HUB_USERNAME }}/v1
+            outputs: type=docker,dest=/tmp/v1.tar
         
-        - name: Save Docker image to a tar file
-          run: docker save ${{ secrets.DOCKER_HUB_USERNAME }}/v1 -o v1.tar
-        - name: Upload a Build Artifact 
-          uses: actions/upload-artifact@v4.3.1
+        - name: Upload artifact
+          uses: actions/upload-artifact@v3
           with:
-              name: imageArtifact
-              path: v1.tar
+            name: myimage
+            path: /tmp/v1.tar
         - name: Output the image name
           id: image_output
-          run: echo "The image name is ${{ secrets.DOCKER_HUB_USERNAME }}/v1"
+          run: |
+            echo "The image name is ${{ secrets.DOCKER_HUB_USERNAME }}/v1"
+            echo "::set-output name=foo::$BAR"
+            echo "$BAR"  # add this line
