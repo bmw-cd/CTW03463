@@ -32,11 +32,12 @@ jobs:
         - name: echo "Waiting for application to start..."
           run: sleep 10 
 
-        - name: Found ip Address
-          run: APP_IP=$(docker inspect --format='{{ range .NetworkSettings.Networks }}{{ .IPAddress }}{{ end }}' nodeapcontainer)
+    
 
         - name: Print Latest Releases
           run: |
+                APP_IP=$(docker inspect --format='{{ range .NetworkSettings.Networks }}{{ .IPAddress }}{{ end }}' nodeapcontainer)
+
                 echo "$APP_IP"
                 echo "Attempting to connect to http://$APP_IP:3000/api/latest-releases"
                 curl http://$APP_IP:3000/api/latest-releases
