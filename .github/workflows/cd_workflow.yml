@@ -5,9 +5,10 @@ on:
     workflows: ["CI workflow"]
     types:
       - completed
-  workflow_dispatch:
 jobs:
+  
     deploy:
+        if: ${{ github.event.pull_request.merged }} &&  ${{github.event.workflow_run.conclusion == 'success'}}
 
         runs-on: self-hosted
         steps:

@@ -2,7 +2,11 @@ name: CI Workflow
 
 on:
   push:
+    branches:
+        - main
   workflow_dispatch:
+  pull_request:
+    branches: [ main ]
     
 
 jobs:
@@ -31,7 +35,6 @@ jobs:
     prod-deployment:
         name: Deploy to Prod
         #needs: test-deployment # This job depends on the successful completion of the int-deployment job
-
         uses: ./.github/workflows/reausable_workflow.yml
         with:
             environment_name: 'prod'
