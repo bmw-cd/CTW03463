@@ -24,7 +24,9 @@ jobs:
             run-id: ${{ github.event.workflow_run.id }}
 
         - name: Load Docker Image
-          run: docker load --input nodeappImage.tar
+          run: |
+              ls -la 
+              docker load --input nodeappImage.tar
 
 
         - name: Run Docker
