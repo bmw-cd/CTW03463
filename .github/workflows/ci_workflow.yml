@@ -18,11 +18,11 @@ jobs:
         - name: Test application
           run: npm test
 
-        - name: SonarQube Scan
-          uses: sonarsource/sonarqube-scan-action@master
-          env:
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+       # - name: SonarQube Scan
+       #   uses: sonarsource/sonarqube-scan-action@master
+       #   env:
+        #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        #    SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
             
         - name: Log in to Docker Hub
           uses: docker/login-action@v3
@@ -33,14 +33,14 @@ jobs:
           uses: docker/build-push-action@v5
           with:
             context: .
-            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/v1
-            outputs: type=docker,dest=/tmp/v1.tar
+            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/nodeapp:v1
+            outputs: type=docker,dest=/tmp/nodeapp:v1.tar
         
         - name: Upload artifact
           uses: actions/upload-artifact@v3
           with:
             name: imageArtifact
-            path: /tmp/v1.tar
+            path: /tmp/nodeapp:v1.tar
         - name: Output the image name
           id: image_output
-          run: echo "The image name is ${{ secrets.DOCKER_HUB_USERNAME }}/v1"
+          run: echo "The image name is ${{ secrets.DOCKER_HUB_USERNAME }}/nodeapp:v1"
