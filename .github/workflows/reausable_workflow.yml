@@ -59,11 +59,6 @@ jobs:
             with:
                 name: nodeappImage
                 path: /tmp/nodeapp-v1.tar
-          - name: Download artifact
-            uses: actions/download-artifact@v3
-            with:
-              name: nodeappImage
-              path: /tmp
           - name: Output the image name
             id: image_output
             run: echo "The image name is ${{ secrets.docker_hub_username }}/nodeapp-v1"
