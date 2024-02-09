@@ -51,6 +51,7 @@ jobs:
               tags: ${{ secrets.docker_hub_username }}/nodeapp-v1
           
           - name: Save Docker image to a tar file
+            if: ${{ inputs.environment_name == 'prod' }}
             run: docker save ${{ secrets.docker_hub_username }}/nodeapp-v1 -o nodeapp-v1.tar
           - name: Upload a Build Artifact 
             uses: actions/upload-artifact@v4.3.1
