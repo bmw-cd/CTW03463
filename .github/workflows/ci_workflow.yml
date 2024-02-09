@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  dev-deployment:
+    name: Deploy to Dev
+    environment: dev
+    runs-on: self-hosted
+    outputs:
+        image_output: ${{ steps.image_output.outputs.value }}
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+  
+        - name: Test application
+          run: npm test
+
+        - name: SonarQube Scan
+          uses: sonarsource/sonarqube-scan-action@master
+          env:
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+            
+        - name: Log in to Docker Hub
+          uses: docker/login-action@v3
+          with:
+            username: ${{ secrets.DOCKER_HUB_USERNAME }}
+            password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+        - name: Set up Docker Buildx
+          uses: docker/build-push-action@v5
+          with:
+            push: true
+            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/v1
+        
+        - name: Save Docker image to a tar file
+          run: docker save ${{ secrets.DOCKER_HUB_USERNAME }}/v1 -o v1.tar
+        - name: Upload a Build Artifact 
+          uses: actions/upload-artifact@v4.3.1
+          with:
+              name: imageArtifact
+              path: v1.tar
+        - name: Output the image name
+          id: image_output
+          run: echo "The image name is ${{ secrets.DOCKER_HUB_USERNAME }}/v1"

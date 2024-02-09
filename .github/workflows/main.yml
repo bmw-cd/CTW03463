@@ -30,7 +30,7 @@ jobs:
           uses: sonarsource/sonarqube-scan-action@master
           env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-            SONAR_HOST_URL: http://172.17.0.2:9000
+            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         - name: Print Environment 
           id: dev_output
           run: echo "${{ vars.CURRENT_ENV }}"
@@ -60,7 +60,7 @@ jobs:
           uses: sonarsource/sonarqube-scan-action@master
           env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-            SONAR_HOST_URL: http://172.17.0.2:9000
+            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
         - name: Print Environment 
           id: int_output
@@ -93,7 +93,7 @@ jobs:
           uses: sonarsource/sonarqube-scan-action@master
           env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-            SONAR_HOST_URL: http://172.17.0.2:9000
+            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         - name: Print Environment 
           id: prod_output
           run: echo "${{ vars.CURRENT_ENV }}"
