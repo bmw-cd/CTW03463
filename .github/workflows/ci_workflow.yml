@@ -8,20 +8,20 @@ on:
 jobs:
     dev-deployment:
         name: Deploy to Dev
-        uses: ./.github/workflows/reusable_workflow.yml
+        uses: ./.github/workflows/reausable_workflow.yml
         with:
             environment_name: 'dev'
     test-deployment:
         name: Deploy to Test
         needs: dev-deployment # This job depends on the successful completion of the int-deployment job
 
-        uses: ./.github/workflows/reusable_workflow.yml
+        uses: ./.github/workflows/reausable_workflow.yml
         with:
             environment_name: 'test'
     prod-deployment:
         name: Deploy to Prod
         needs: test-deployment # This job depends on the successful completion of the int-deployment job
 
-        uses: ./.github/workflows/reusable_workflow.yml
+        uses: ./.github/workflows/reausable_workflow.yml
         with:
             environment_name: 'prod'
