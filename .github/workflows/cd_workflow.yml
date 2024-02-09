@@ -30,7 +30,7 @@ jobs:
           run: docker run --name=nodeapcontainer -dp 127.0.0.1:3000:3000 ${{ secrets.docker_hub_username }}/nodeapp-v1
           
         - name: Found ip Address
-          run: echo "APP_IP=$(docker inspect --format='{{.NetworkSettings.IPAddress}}' app)" >> $GITHUB_ENV
+          run: echo "APP_IP=$(docker inspect --format='{{.NetworkSettings.IPAddress}}' nodeapcontainer)" >> $GITHUB_ENV
 
         - name: Print Latest Releases
           run: curl http://$APP_IP:3000/api/latest-releases 
