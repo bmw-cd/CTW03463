@@ -7,22 +7,19 @@ on:
               description: 'The target environment for the workflow'
               required: true
               type: string
+        secrets:
             docker_hub_username:
               description: 'Docker Hub username'
               required: true
-              type: string
             docker_hub_access_token:
               description: 'Docker Hub access token'
               required: true
-              type: string
             sonar_token:
               description: 'SonarQube token'
               required: true
-              type: string
             sonar_host_url:
               description: 'SonarQube host URL'
               required: true
-              type: string
 jobs:
     ci_workflow:
     
