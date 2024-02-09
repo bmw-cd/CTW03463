@@ -34,7 +34,7 @@ jobs:
           with:
             context: .
             tags: ${{ secrets.DOCKER_HUB_USERNAME }}/v1
-            outputs: type=docker,dest=/v1.tar
+            outputs: type=docker,dest=v1.tar
         
         - name: Upload artifact
           uses: actions/upload-artifact@v3
