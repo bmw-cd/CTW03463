@@ -55,7 +55,7 @@ jobs:
               tags: ${{ secrets.docker_hub_username }}/nodeapp-v1
               outputs: type=docker,dest=/tmp/nodeapp-v1.tar
           - name: Upload artifact
-            uses: actions/upload-artifact@v3
+            uses: actions/upload-artifact@v4
             with:
                 name: nodeappImage
                 path: /tmp/nodeapp-v1.tar
