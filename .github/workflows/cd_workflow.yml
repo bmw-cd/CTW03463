@@ -27,7 +27,7 @@ jobs:
 
 
         - name: Run Docker
-          run: docker run --name=nodeapcontainer -dp 127.0.0.1:3000:3000 ${{ secrets.docker_hub_username }}/nodeapp-v1
+          run: docker run --name nodeapcontainer -dp 127.0.0.1:3000:3000 ${{ secrets.docker_hub_username }}/nodeapp-v1
           
         - name: echo "Waiting for application to start..."
           run: sleep 10 
