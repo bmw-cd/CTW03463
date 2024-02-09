@@ -26,7 +26,7 @@ jobs:
         - name: Load Docker Image
           run: |
               ls -la 
-              docker load --input nodeappImage.tar
+              docker load --input nodeapp-v1.tar
 
 
         - name: Run Docker
