@@ -54,4 +54,8 @@ jobs:
             push: true
             tags: ${{ secrets.DOCKER_HUB_USERNAME }}/nodeapp-v1:latest
 
+        - name: Shut Down Docker
+          run: |
+                docker stop nodeapcontainer
+                docker rm nodeapcontainer
         
