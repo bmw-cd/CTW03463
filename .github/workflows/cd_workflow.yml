@@ -14,7 +14,13 @@ jobs:
         - name: Checkout code
           uses: actions/checkout@v4
 
-
+        - name: Download  
+          uses: actions/download-artifact@v4
+          with:
+            name: my-other-artifact
+            github-token: ${{ secrets.GITHUB_TOKEN }} # token with actions:read permissions on target repo
+            repository: actions/toolkit
+            run-id: ${{ github.event.workflow_run.id }}
 
         - name: Load Docker Image
           run: docker load --input /tmp/nodeapp-v1.tar
