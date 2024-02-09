@@ -1,12 +1,12 @@
 name: CD Workflow
 
 on:
-  #workflow_run:
-   # workflows: ["CI workflow"]
-   # types:
-   #   - completed
-   push:
-   workflow_dispatch:
+  workflow_run:
+    workflows: ["CI workflow"]
+    types:
+      - completed
+  push:
+  workflow_dispatch:
 jobs:
     compile:
         name: Compile Prod
@@ -28,14 +28,10 @@ jobs:
         - name: Checkout code
           uses: actions/checkout@v4
 
-        - name: Download artifact
-          uses: actions/download-artifact@v3
-          with:
-            path: /tmp
-            name: nodeappImage
+
 
         - name: Load Docker Image
-          run: docker load --input /tmp/nodeappImage.tar
+          run: docker load --input tmp/nodeappImage.tar
         - name: Run Docker
           run: docker run --name nodeAppContainer -dp 127.0.0.1:3000:3000 nodeappImage
         

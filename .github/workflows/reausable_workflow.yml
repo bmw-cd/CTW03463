@@ -39,6 +39,7 @@ jobs:
           # SONAR_TOKEN: ${{ secrets.sonar_token }}
           #  SONAR_HOST_URL: ${{ secrets.sonar_host_url }}
               
+
               
           - name: Set up Docker Buildx
             uses: docker/setup-buildx-action@v3
@@ -54,6 +55,7 @@ jobs:
             with:
                 name: nodeappImage
                 path: /tmp/nodeapp-v1.tar
+          
           - name: Output the image name
             id: image_output
             run: echo "The image name is ${{ secrets.docker_hub_username }}/nodeapp-v1"

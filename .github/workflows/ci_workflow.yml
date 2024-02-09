@@ -1,6 +1,7 @@
 name: CI Workflow
 
 on:
+  push:
   workflow_dispatch:
     
 
@@ -26,10 +27,10 @@ jobs:
     #      docker_hub_username: ${{ secrets.DOCKER_HUB_USERNAME }}
     #       docker_hub_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
     #      sonar_token: ${{ secrets.SONAR_TOKEN }}
-    #    sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
+    #        sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
     prod-deployment:
         name: Deploy to Prod
-       # needs: test-deployment # This job depends on the successful completion of the int-deployment job
+        #needs: test-deployment # This job depends on the successful completion of the int-deployment job
 
         uses: ./.github/workflows/reausable_workflow.yml
         with:
