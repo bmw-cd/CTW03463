@@ -31,10 +31,10 @@ jobs:
         - name: Download artifact
           uses: actions/download-artifact@v3
           with:
-            name: nodeappImage
+            name: nodeappImage.tar
 
         - name: Load Docker Image
-          run: docker load --input nodeappImage
+          run: docker load --input nodeappImage.tar
         - name: Run Docker
           run: docker run --name nodeAppContainer -dp 127.0.0.1:3000:3000 nodeappImage
         
